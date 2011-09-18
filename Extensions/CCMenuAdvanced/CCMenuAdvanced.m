@@ -56,7 +56,16 @@
 
 @end
 
+#pragma mark CCNode AddChild Private Methods
 
+@interface CCNode ()
+
+// lazy allocs
+-(void) childrenAlloc;
+// helper that reorder a child
+-(void) insertChild:(CCNode*)child z:(NSInteger)z;
+
+@end
 
 
 @implementation CCMenuAdvanced
@@ -71,7 +80,19 @@
 
 #pragma mark Init/DeInit
 
--(id) initWithItems: (CCMenuItem*) item vaList: (va_list) args
++(id) menuWithItems: (CCNode*) item, ...
+{
+	va_list args;
+	va_start(args,item);
+    
+	id s = [[[self alloc] initWithItems: item vaList:args] autorelease];
+    
+	va_end(args);
+	return s;
+}
+
+//-(id) initWithItems: (CCMenuItem*) item vaList: (va_list) args
+-(id) initWithItems: (CCNode*) item vaList: (va_list) args
 {
 	if ( (self = [super initWithItems:item vaList:args]) )
 	{
@@ -621,6 +642,8 @@
 	
 	CCMenuItem* item;
 	CCARRAY_FOREACH(children_, item){
+        if ([itemTemp isKindOfClass:[CCMenuItem class]]) {
+            CCMenuItem *item = (CCMenuItem *)itemTemp;
 		// ignore invisible and disabled items: issue #779, #866
 		if ( [item visible] && [item isEnabled] ) {
 			
@@ -631,8 +654,34 @@
 			if( CGRectContainsPoint( r, local ) )
 				return item;
 		}
+        }
 	}
 	return nil;
 }
+
+/* "add" logic MUST only be on this method
+ * If a class want's to extend the 'addChild' behaviour it only needs
+ * to override this method
+ */
+-(void) addChild: (CCNode*) child z:(NSInteger)z tag:(NSInteger) aTag
+{
+	NSAssert( child != nil, @"Argument must be non-nil");
+	NSAssert( child.parent == nil, @"child already added. It can't be added again");
+    
+	if( ! children_ )
+		[self childrenAlloc];
+    
+	[self insertChild:child z:z];
+    
+	child.tag = aTag;
+    
+	[child setParent: self];
+    
+	if( isRunning_ ) {
+		[child onEnter];
+		[child onEnterTransitionDidFinish];
+	}
+}
+
 @end
 
