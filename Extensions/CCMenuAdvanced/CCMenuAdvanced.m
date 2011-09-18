@@ -644,16 +644,16 @@
 	CCARRAY_FOREACH(children_, item){
         if ([itemTemp isKindOfClass:[CCMenuItem class]]) {
             CCMenuItem *item = (CCMenuItem *)itemTemp;
-		// ignore invisible and disabled items: issue #779, #866
-		if ( [item visible] && [item isEnabled] ) {
-			
-			CGPoint local = [item convertToNodeSpace:touchLocation];
-			CGRect r = [item rect];
-			r.origin = CGPointZero;
-			
-			if( CGRectContainsPoint( r, local ) )
-				return item;
-		}
+            // ignore invisible and disabled items: issue #779, #866
+            if ( [item visible] && [item isEnabled] ) {
+                
+                CGPoint local = [item convertToNodeSpace:touchLocation];
+                CGRect r = [item rect];
+                r.origin = CGPointZero;
+                
+                if( CGRectContainsPoint( r, local ) )
+                    return item;
+            }
         }
 	}
 	return nil;
