@@ -140,9 +140,9 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate: self 
-													 priority:[self mouseDelegatePriority] 
-											  swallowsTouches: YES ];
+	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate: self
+													 priority:[self mouseDelegatePriority]
+											  swallowsTouches: NO ];
 }
 #endif
 
@@ -578,10 +578,6 @@
 	selectedItem_ = [self itemForTouch:touch];
 	[selectedItem_ selected];
 	
-	if( selectedItem_ ) {
-		state_ = kCCMenuStateTrackingTouch;
-		return YES;
-	}
 	
 	// start slide even if touch began outside of menuitems, but inside menu rect
 	if ( !CGRectIsNull(boundaryRect_) && [self isTouchForMe: touch] ){
