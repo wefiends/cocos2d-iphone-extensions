@@ -134,12 +134,13 @@
 /** Changes menu position to stay inside of boundaryRect if it is non-null. */
 - (void) fixPosition;
 
-#pragma mark Advanced Menu - Selecting Items
-- (void) selectNextMenuItem;
-- (void) selectPrevMenuItem;
-
-#pragma mark Advanced Menu - Activating/Cancelling Selected Items.
-- (void) activateSelectedItem;
-- (void) cancelSelectedItem;
+#pragma mark This whole section doesn't work with CCNode at the moment
+//#pragma mark Advanced Menu - Selecting Items
+//- (void) selectNextMenuItem;
+//- (void) selectPrevMenuItem;
+//
+//#pragma mark Advanced Menu - Activating/Cancelling Selected Items.
+//- (void) activateSelectedItem;
+//- (void) cancelSelectedItem;
 
 @end

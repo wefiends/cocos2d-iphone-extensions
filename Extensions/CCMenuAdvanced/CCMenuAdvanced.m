@@ -136,83 +136,83 @@
 }
 #endif
 
-#pragma mark Advanced Menu - Selecting/Activating Items
-
-- (void) selectNextMenuItem
-{
-	if ([children_ count] < 2)
-		return;
-	
-	selectedItemNumber_++;
-	
-	// borders
-	if (selectedItemNumber_ >= (int)[children_ count])
-		selectedItemNumber_ = 0;
-	if (selectedItemNumber_ < 0)
-		selectedItemNumber_ = [children_ count] - 1;
-	
-	// select selected
-	int i = 0;
-	for (CCMenuItem *item in children_)
-	{
-		[item unselected];
-		if ( i == selectedItemNumber_ )
-			[item selected];
-		++i;
-	}
-}
-
-- (void) selectPrevMenuItem
-{
-	if ([children_ count] < 2)
-		return;
-	
-	selectedItemNumber_--;
-	
-	// borders
-	if (selectedItemNumber_ >= (int)[children_ count])
-		selectedItemNumber_ = 0;
-	if (selectedItemNumber_ < 0)
-		selectedItemNumber_ = [children_ count] - 1;
-	
-	// select selected
-	int i = 0;
-	for (CCMenuItem *item in children_)
-	{
-		if ( i == selectedItemNumber_ )
-			[item selected];
-		else 
-			[item unselected];
-		
-		++i;
-	}
-}
-
-- (void) activateSelectedItem
-{
-	if (selectedItemNumber_ < 0)
-		return;
-	
-	// Unselect selected menu item.
-	CCMenuItem *item = [children_ objectAtIndex: selectedItemNumber_];
-	[item unselected];
-	selectedItemNumber_ = -1;
-	
-	[item activate];
-	
-}
-
-- (void) cancelSelectedItem
-{
-	if( selectedItem_ ) {
-		[selectedItem_ unselected];
-		selectedItem_ = nil;
-	}
-	
-	selectedItemNumber_ = -1;
-
-	state_ = kCCMenuStateWaiting;
-}
+#pragma mark This whole section doesn't work with CCNode right now.
+//#pragma mark Advanced Menu - Selecting/Activating Items
+//
+//- (void) selectNextMenuItem
+//{
+//	if ([children_ count] < 2)
+//		return;
+//
+//	selectedItemNumber_++;
+//
+//	// borders
+//	if (selectedItemNumber_ >= (int)[children_ count])
+//		selectedItemNumber_ = 0;
+//	if (selectedItemNumber_ < 0)
+//		selectedItemNumber_ = [children_ count] - 1;
+//
+//	// select selected
+//	int i = 0;
+//
+//	for (CCMenuItem *item in children_)
+//	{
+//            [item unselected];
+//            if ( i == selectedItemNumber_)
+//                [item selected];
+//		++i;
+//	}
+//}
+//
+//- (void) selectPrevMenuItem
+//{
+//	if ([children_ count] < 2)
+//		return;
+//
+//	selectedItemNumber_--;
+//
+//	// borders
+//	if (selectedItemNumber_ >= (int)[children_ count])
+//		selectedItemNumber_ = 0;
+//	if (selectedItemNumber_ < 0)
+//		selectedItemNumber_ = [children_ count] - 1;
+//
+//	// select selected
+//	int i = 0;
+//	for (CCMenuItem *item in children_) {
+//        if ( i == selectedItemNumber_)
+//            [item selected];
+//        else
+//            [item unselected];
+//		++i;
+//	}
+//}
+//
+//- (void) activateSelectedItem
+//{
+//	if (selectedItemNumber_ < 0)
+//		return;
+//
+//	// Unselect selected menu item.
+//	CCMenuItem *item = [children_ objectAtIndex: selectedItemNumber_];
+//	[item unselected];
+//	selectedItemNumber_ = -1;
+//
+//	[item activate];
+//
+//}
+//
+//- (void) cancelSelectedItem
+//{
+//	if( selectedItem_ ) {
+//		[selectedItem_ unselected];
+//		selectedItem_ = nil;
+//	}
+//
+//	selectedItemNumber_ = -1;
+//
+//	state_ = kCCMenuStateWaiting;
+//}
 
 #pragma mark Advanced Menu - Alignment
 // differences from std impl:
