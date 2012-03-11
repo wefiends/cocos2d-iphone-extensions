@@ -186,6 +186,7 @@
     CGPoint pos = thumb.position;
     pos.x = location.x;
     thumb.position = pos;
+    self.value = (thumb.position.x - minX) / (maxX - minX);
 }
 
 -(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
