@@ -111,7 +111,7 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate: self 
+	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate: self 
 													 priority:[self mouseDelegatePriority] 
 											  swallowsTouches: YES ];
 }
