@@ -25,7 +25,7 @@ How to create (Easy)
 How to create (Advanced)
 ------------------------
 
-		CCMenuItemSprite *thumb1 = [CCMenuItemSprite itemFromNormalSprite: thumb1Button 
+		CCMenuItemSprite *thumb1 = [CCMenuItemSprite itemWithNormalSprite: thumb1Button 
 														   selectedSprite: thumb1ButtonSelected];
 		
 		_musicSlider = 
