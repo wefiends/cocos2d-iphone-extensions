@@ -798,7 +798,6 @@ typedef enum
 {
 	self.touches = nil;
 	self.delegate = nil;
-	[super dealloc];
 }
 
 @end

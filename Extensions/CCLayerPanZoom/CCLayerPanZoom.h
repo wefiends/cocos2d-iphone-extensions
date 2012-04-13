@@ -71,7 +71,7 @@ typedef enum
 	CGRect _panBoundsRect;
 	CGFloat _touchDistance;
 	CGFloat _maxTouchDistanceToClick;
-	id<CCLayerPanZoomClickDelegate> _delegate;
+	__unsafe_unretained id<CCLayerPanZoomClickDelegate> _delegate;
     
     CCLayerPanZoomMode _mode;
     CGFloat _minSpeed;
